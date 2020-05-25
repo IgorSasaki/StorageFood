@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import api from '../../Services/API';
 
 import './style.css';
 
 export default function ListFood() {
+    const [food, setFood] = useState([]);
+
+    useEffect(() => {
+        api.get('listFood').then((response) => {
+            setFood(response.data)
+
+            console.log(response.data)
+        })
+    })
+
     return (
         <div className="listFood-container">
             <header>
@@ -15,41 +26,23 @@ export default function ListFood() {
                 <Link className="button" style={{ width: '40%', marginLeft: '400px' }} to="/registerFood" >Registrar Alimento</Link>
             </header>
 
-            <h1>Lista de Alimentos Arrecadados</h1>
+            <h1>Lista de Alimentos Arrecadados ({Object.keys(food).length})</h1>
 
             <ul>
-                <li>
-                    <strong>Descriçao: </strong>
-                    <p>Descriçao:</p>
+                {
+                    food.map((food) => (
+                        <li>
+                            <strong>Descriçao: </strong>
+                            <p>{food.descricao}</p>
 
-                    <strong>Quantidade: </strong>
-                    <p>Quantidade: </p>
+                            <strong>Quantidade: </strong>
+                            <p>{food.quantidade}</p>
 
-                    <strong>Medida: </strong>
-                    <p>Medida:</p>
-                </li>
-
-                <li>
-                    <strong>Descriçao: </strong>
-                    <p>Descriçao:</p>
-
-                    <strong>Quantidade: </strong>
-                    <p>Quantidade: </p>
-
-                    <strong>Medida: </strong>
-                    <p>Medida:</p>
-                </li>
-
-                <li>
-                    <strong>Descriçao: </strong>
-                    <p>Descriçao:</p>
-
-                    <strong>Quantidade: </strong>
-                    <p>Quantidade: </p>
-
-                    <strong>Medida: </strong>
-                    <p>Medida:</p>
-                </li>
+                            <strong>Medida: </strong>
+                            <p>{food.unidade}</p>
+                        </li>
+                    ))
+                }
             </ul>
         </div>
     )
