@@ -13,5 +13,19 @@ module.exports = {
             })
 
         return response.json({ id });
-    }
+    },
+    async index(request, response) {
+        const alimentos = await connection('alimentos').select('*');
+
+        return response.json(alimentos);
+    },
+    async delete(request, response) {
+        const { id } = request.params;
+
+        await connection('alimentos')
+            .where('id', id)
+            .delete();
+
+        return response.status(204).send();
+    },
 }
