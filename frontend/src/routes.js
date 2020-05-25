@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 
 import ListFood from './Pages/ListFood';
-import RegisterFood from './Pages/NewFood';
+import RegisterFood from './Pages/RegisterFood';
 
 export default class Routes extends Component {
     render(){
@@ -10,7 +10,7 @@ export default class Routes extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/" exact component={ListFood} />
-                    <Route path="registerFood" component={RegisterFood} />
+                    <Route path="/registerFood" component={RegisterFood} />
                 </Switch>
             </BrowserRouter>
         )
