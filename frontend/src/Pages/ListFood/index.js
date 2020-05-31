@@ -28,12 +28,19 @@ export default function ListFood() {
 
     function somaTotalQuantidade() {
         let somaTotal = 0;
+        let pesoTotal = 0;
+        let calcPeso = 0;
 
         for (let i = 0; i < Object.keys(food).length; i++) {
             somaTotal += food[i].quantidade
+
+            if(food[i].unidade === "kg"){
+                calcPeso = food[i].quantidade * food[i].medida
+                pesoTotal+= calcPeso;
+            }
         }
 
-        return(<h1>Lista de Alimentos Arrecadados ({somaTotal})</h1>);
+        return(<h1>Lista de Alimentos Arrecadados ({somaTotal} Itens - {pesoTotal.toFixed(2)} Kg)</h1>);
     }
 
     return (
